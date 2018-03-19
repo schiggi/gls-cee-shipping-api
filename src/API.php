@@ -39,7 +39,7 @@ class API {
                 ->key('password', v::stringType()->notEmpty()->length(1,20))
                 ->key('client_number', v::stringType()->notEmpty()->length(1,20))
                 ->key('country_code', v::stringType()->notEmpty()->in(array_keys($this->urls)))
-                ->key('label_paper_size', v::stringType()->notEmpty()->in(array_keys($this->label_size)))
+                ->key('label_paper_size', v::stringType()->notEmpty()->in(array_values($this->label_size)))
                 ->assert($this->config);
         } catch(NestedValidationException $exception) {
             echo $exception->getFullMessage();
