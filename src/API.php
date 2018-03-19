@@ -333,14 +333,11 @@ class API {
             $this->logger->error($error);
         }
 
-		// Workaround " <b>Notice</b>: Array to string conversion in fergusean/nusoap/lib/class.wsdl.php:1550"
-//		ob_start();
         $result = $client->call($method, $data);
-//		ob_end_clean();
 
         // log soap request and response
-        $this->log('Request: ' . $client->request);
-        $this->log('Response: ' . $client->response);
+//        $this->log('Request: ' . $client->request);
+//        $this->log('Response: ' . $client->response);
         // log soap result
 //        if ($client->fault) {
 //            $this->log($result);
