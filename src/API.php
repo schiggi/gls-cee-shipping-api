@@ -102,7 +102,7 @@ class API {
 
             // the smallest fraction is 5 for COD amount
             $parcel['CodAmount'] = round((float)$parcel['CodAmount'] / 5, 0) * 5;
-            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate = \"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime("'" . $parcel["PickupDate"] . "'")) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount = \"" . $parcel['CodAmount'] . "\" CODCurr = \"HUF\" CODRef = \"" . $parcel['CodRef'] . "\" PCount = \"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
+            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate = \"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount = \"" . $parcel['CodAmount'] . "\" CODCurr = \"HUF\" CODRef = \"" . $parcel['CodRef'] . "\" PCount = \"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
             $data .= "<From Name=\"" . $parcel['SenderName'] . "\" Address=\"" . $parcel['SenderAddress'] . "\" ZipCode = \"" . $parcel['SenderZipcode'] . "\" City = \"" . $parcel['SenderCity'] . "\" CtrCode=\"" . $parcel['SenderCountry'] . "\" ContactName=\"" . $parcel['SenderContact'] . "\" ContactPhone=\"" . $parcel['SenderPhone'] . "\" EmailAddress=\"" . $parcel['SenderEmail'] . "\" />";
             $data .= "<To Name=\"" . $parcel['ConsigName'] . "\" Address=\"" . $parcel['ConsigAddress'] . "\" ZipCode=\"" . $parcel['ConsigZipcode'] . "\" City=\"" . $parcel['ConsigCity'] . "\" CtrCode=\"" . $parcel['ConsigCountry'] . "\" ContactName=\"" . $parcel['ConsigContact'] . " #" . $parcel["ClientRef"] . "\" ContactPhone=\"" . $parcel["ConsigPhone"] . "\" EmailAddress=\"" . $parcel["ConsigEmail"] . "\" />";
             if (!empty($parcel['Services'])) {
@@ -395,10 +395,14 @@ class API {
     private function validateParcelPrepare ($data) {
         try {
             v::key('Services', v::ArrayType())
+                // check date format for pickup date
                 ->key('PickupDate', v::date('Y-m-d')->notEmpty())
                 ->assert($data);
             v::optional(
+                // check cod ref length
                 v::key('CodRef', v::stringType()->length(0,512))
+                //check phone number for receiver (international format)
+                ->keyNested('Services.FSS',v::phone())
             )->assert($data);
         } catch(NestedValidationException $exception) {
             echo $exception->getFullMessage();
