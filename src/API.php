@@ -227,34 +227,37 @@ class API {
 	/**
 	 * Get parcel status
 	 *
-	 * @param $tracking_code
-	 * @return mixed
+	 * @param $parcelNumber
+	 * @return int
 	 */
 	public function getParcelStatus($parcelNumber) {
-		$html = $this->request($this->getTrackingUrl($parcelNumber));
-		$dom = new Crawler($html);
-		$row = $dom->filter('table tr.colored_0, table tr.colored_1')->first();
+		$config_array = [
+            'verify' => false,
+            'debug' => false
+        ];
+        $client = new Client($config_array);
+        $response = $client->request("GET", $this->getTrackingUrlXml($parcelNumber));
+        $xml = simplexml_load_string($response->getBody());
 
 		try {
-            if (!count($row)) {
-                throw new Exception('Tracking code wasn`t registered or error occured!');
+            if ($xml !== FALSE) {
+            	$delivery_code = $xml->Parcel->Statuses->Status[0]['StCode'];                
             } else {
-                $data = array_map('trim', [
-                    'date' => $row->filter('td')->eq(0)->text(),
-                    'status' => $row->filter('td')->eq(1)->text(),
-                    'depot' => $row->filter('td')->eq(2)->text(),
-                    'info' => $row->filter('td')->eq(3)->text()
-                ]);
+        		throw new Exception('Tracking code wasn`t registered or error occured!');
             }
 		} catch (\Exception $e) {
                 echo $e->getMessage();
 		}
 
-		return isset($data['status']) ? $data['status'] : false;
+		return isset($delivery_code) ? (int)$delivery_code : false;
 	}
 
 	public function getTrackingUrl($parcelNumber, $language = 'en') {
 		return "http://online.gls-hungary.com/tt_page.php?tt_value=$parcelNumber&lng=$language";
+	}
+
+	public function getTrackingUrlXml($parcelNumber) {
+		return "http://online.gls-hungary.com/tt_page_xml.php?pclid=$parcelNumber";
 	}
 
     /**

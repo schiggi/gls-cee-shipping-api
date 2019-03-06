@@ -113,10 +113,9 @@ $deleted_parcels = $api->deleteParcels($delete_parcels);
 echo '<pre>',print_r($deleted_parcels,1),'</pre>';
 
 
-
 //******************** Parcel status test *****************/
-//echo 'Status is: ' . $api->getParcelStatus('00209053637') . '<br>';
+// echo 'Status is: ' . $api->getParcelStatus('00209053637') . '<br>';
 
 //******************** Print tracking url *****************/
 //// Parcel tracking url
-//echo 'Status is: ' . $api->getTrackingUrl('00209053509') . '<br>';
+// echo 'Tracking URL is: ' . $api->getTrackingUrl('00209053509') . '<br>';
