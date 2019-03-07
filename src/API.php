@@ -62,7 +62,8 @@ class API {
         $resolver->setDefault('country_code', 'HU');
         $resolver->setDefault('label_paper_size', 'A4_2x2');
         $resolver->setDefault('log_dir', '');
-        $resolver->setDefault('log_rotation_days', '7');
+		$resolver->setDefault('log_rotation_days', '7');
+		$resolver->setDefault('log_syslog', false);
         $resolver->setDefault('log_msg_format', ['{method} {uri} HTTP/{version} {req_body}','RESPONSE: {code} - {res_body}',]);
         $resolver->setRequired(['url', 'username', 'password','client_number']);
         return $resolver->resolve($opts);
@@ -241,7 +242,7 @@ class API {
 
 		try {
             if ($xml !== FALSE) {
-            	$delivery_code = $xml->Parcel->Statuses->Status[0]['StCode'];                
+            	$delivery_code = $xml->Parcel->Statuses->Status[0]['StCode'];
             } else {
         		throw new Exception('Tracking code wasn`t registered or error occured!');
             }
@@ -374,10 +375,16 @@ class API {
     private function getLogger()
     {
         if (empty($this->logger)) {
-            $this->logger = with(new \Monolog\Logger('api-consumer'))->pushHandler(
+            $this->logger = new \Monolog\Logger('api-gls-consumer');
+			$this->logger->pushHandler(
                 new \Monolog\Handler\RotatingFileHandler( $this->config['log_dir'] . 'api-gls-consumer.log', $this->config['log_rotation_days'])
             );
         }
+		if (!empty($this->config['log_syslog'])) {
+			$this->logger->pushHandler(
+				new \Monolog\Handler\SyslogHandler('api-gls-consumer')
+			);
+		}
 
         return $this->logger;
     }
