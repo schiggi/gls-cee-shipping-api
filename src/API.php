@@ -101,9 +101,10 @@ class API {
             // validate parcel data
             $this->validateParcelPrepare($parcel);
 
+			$parcel['CodCurr'] = $parcel['CodCurr'] ?? 'HUF';
             // the smallest fraction is 5 for COD amount
             $parcel['CodAmount'] = round((float)$parcel['CodAmount'] / 5, 0) * 5;
-            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate = \"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount = \"" . $parcel['CodAmount'] . "\" CODCurr = \"HUF\" CODRef = \"" . $parcel['CodRef'] . "\" PCount = \"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
+            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate = \"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount = \"" . $parcel['CodAmount'] . "\" CODCurr = \"" . $parcel['CodCurr'] . "\" CODRef = \"" . $parcel['CodRef'] . "\" PCount = \"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
             $data .= "<From Name=\"" . $parcel['SenderName'] . "\" Address=\"" . $parcel['SenderAddress'] . "\" ZipCode = \"" . $parcel['SenderZipcode'] . "\" City = \"" . $parcel['SenderCity'] . "\" CtrCode=\"" . $parcel['SenderCountry'] . "\" ContactName=\"" . $parcel['SenderContact'] . "\" ContactPhone=\"" . $parcel['SenderPhone'] . "\" EmailAddress=\"" . $parcel['SenderEmail'] . "\" />";
             $data .= "<To Name=\"" . $parcel['ConsigName'] . "\" Address=\"" . $parcel['ConsigAddress'] . "\" ZipCode=\"" . $parcel['ConsigZipcode'] . "\" City=\"" . $parcel['ConsigCity'] . "\" CtrCode=\"" . $parcel['ConsigCountry'] . "\" ContactName=\"" . $parcel['ConsigContact'] . " #" . $parcel["ClientRef"] . "\" ContactPhone=\"" . $parcel["ConsigPhone"] . "\" EmailAddress=\"" . $parcel["ConsigEmail"] . "\" />";
             if (!empty($parcel['Services'])) {

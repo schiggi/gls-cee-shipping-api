@@ -71,6 +71,7 @@ $parcel_prepare[] = array(
     //
     'ClientRef' => '14051',
     'CodAmount' => 5999,
+	'CodCurr' => 'RON',
     'CodRef' => '2018-200546',
     'Pcount' => 1,
     'PickupDate' => '2018-02-26',
