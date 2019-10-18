@@ -93,8 +93,8 @@ class API {
      */
     public function getParcelNumbers($parcel_data) {
         date_default_timezone_set("Europe/Budapest");
-        $data = "<?xml version=\"1.0\" encoding = \"UTF-8\"?>";
-        $data .="<DTU EmailAddress = \"" . $parcel_data[0]['SenderEmail'] . "\" Version=\"16.12.15.01\" Created = \"" . date(DATE_ATOM) . "\" RequestType = \"GlsApiRequest\" MethodName=\"prepareLabels\">";
+        $data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        $data .="<DTU EmailAddress=\"" . $parcel_data[0]['SenderEmail'] . "\" Version=\"16.12.15.01\" Created =\"" . date(DATE_ATOM) . "\" RequestType=\"GlsApiRequest\" MethodName=\"prepareLabels\">";
         $data .= '<Shipments>';
 
         foreach ($parcel_data as $parcel) {
@@ -104,15 +104,15 @@ class API {
 			$parcel['CodCurr'] = $parcel['CodCurr'] ?? 'HUF';
             // the smallest fraction is 5 for COD amount
             $parcel['CodAmount'] = round((float)$parcel['CodAmount'] / 5, 0) * 5;
-            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate = \"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount = \"" . $parcel['CodAmount'] . "\" CODCurr = \"" . $parcel['CodCurr'] . "\" CODRef = \"" . $parcel['CodRef'] . "\" PCount = \"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
-            $data .= "<From Name=\"" . $parcel['SenderName'] . "\" Address=\"" . $parcel['SenderAddress'] . "\" ZipCode = \"" . $parcel['SenderZipcode'] . "\" City = \"" . $parcel['SenderCity'] . "\" CtrCode=\"" . $parcel['SenderCountry'] . "\" ContactName=\"" . $parcel['SenderContact'] . "\" ContactPhone=\"" . $parcel['SenderPhone'] . "\" EmailAddress=\"" . $parcel['SenderEmail'] . "\" />";
+            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate=\"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount=\"" . $parcel['CodAmount'] . "\" CODCurr=\"" . $parcel['CodCurr'] . "\" CODRef=\"" . $parcel['CodRef'] . "\" PCount=\"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
+            $data .= "<From Name=\"" . $parcel['SenderName'] . "\" Address=\"" . $parcel['SenderAddress'] . "\" ZipCode=\"" . $parcel['SenderZipcode'] . "\" City=\"" . $parcel['SenderCity'] . "\" CtrCode=\"" . $parcel['SenderCountry'] . "\" ContactName=\"" . $parcel['SenderContact'] . "\" ContactPhone=\"" . $parcel['SenderPhone'] . "\" EmailAddress=\"" . $parcel['SenderEmail'] . "\" />";
             $data .= "<To Name=\"" . $parcel['ConsigName'] . "\" Address=\"" . $parcel['ConsigAddress'] . "\" ZipCode=\"" . $parcel['ConsigZipcode'] . "\" City=\"" . $parcel['ConsigCity'] . "\" CtrCode=\"" . $parcel['ConsigCountry'] . "\" ContactName=\"" . $parcel['ConsigContact'] . " #" . $parcel["ClientRef"] . "\" ContactPhone=\"" . $parcel["ConsigPhone"] . "\" EmailAddress=\"" . $parcel["ConsigEmail"] . "\" />";
             if (!empty($parcel['Services'])) {
                 $data .= '<Services>';
                 foreach ($parcel['Services'] as $service_code => $service_parameter) {
                     $data .= "<Service Code=\"" . $service_code . "\" >";
                         $data .= '<Info>';
-                            $data .= "<Service InfoType=\"Info\" Infodata=\"" . $service_parameter . "\" />";
+                            $data .= "<ServiceInfo InfoType=\"INFO\" InfoData=\"" . $service_parameter . "\" />";
                         $data .= '</Info>';
                     $data .= '</Service>';
                 }
@@ -175,8 +175,8 @@ class API {
     public function getParcelLabels($parcel_ids) {
 
         date_default_timezone_set("Europe/Budapest");
-        $data = "<?xml version=\"1.0\" encoding = \"UTF-8\"?>";
-        $data .="<DTU EmailAddress = \"test@gls-hungary.com\" Version=\"16.12.15.01\" Created = \"" . date(DATE_ATOM) . "\" RequestType = \"GlsApiRequest\" MethodName=\"printLabels\">";
+        $data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        $data .="<DTU EmailAddress=\"test@gls-hungary.com\" Version=\"16.12.15.01\" Created=\"" . date(DATE_ATOM) . "\" RequestType=\"GlsApiRequest\" MethodName=\"printLabels\">";
         $data .= '<Shipments>';
         foreach ($parcel_ids as $parcel_id) {
             $data .= "<Shipment><PclIDs><long>";
@@ -275,8 +275,8 @@ class API {
     public function deleteParcels($parcel_ids) {
 
         date_default_timezone_set("Europe/Budapest");
-        $data = "<?xml version=\"1.0\" encoding = \"UTF-8\"?>";
-        $data .="<DTU EmailAddress = \"test@gls-hungary.com\" Version=\"16.12.15.01\" Created = \"" . date(DATE_ATOM) . "\" RequestType = \"GlsApiRequest\" MethodName=\"deleteLabels\">";
+        $data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        $data .="<DTU EmailAddress=\"test@gls-hungary.com\" Version=\"16.12.15.01\" Created=\"" . date(DATE_ATOM) . "\" RequestType=\"GlsApiRequest\" MethodName=\"deleteLabels\">";
         $data .= '<Shipments>';
         foreach ($parcel_ids as $parcel_id) {
             $data .= "<Shipment><PclIDs><long>";
