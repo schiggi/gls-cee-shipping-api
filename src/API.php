@@ -4,7 +4,6 @@ namespace GLS;
 
 use nusoap_client;
 use GuzzleHttp\Client;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationException;
@@ -13,13 +12,13 @@ use Respect\Validation\Exceptions\NestedValidationException;
 class API {
 
 	protected $urls = [
-		'HU' => 'https://online.gls-hungary.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
+		'HU' => 'https://online.gls-hungary.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
         'HU-TEST' => 'https://test.gls-hungary.com/webservices/soap_server.php?wsdl&ver=15.04.18.01',
-		'SK' => 'http://online.gls-slovakia.sk/webservices/soap_server.php?wsdl&ver=16.12.15.01',
-		'CZ' => 'http://online.gls-czech.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
-		'RO' => 'http://online.gls-romania.ro/webservices/soap_server.php?wsdl&ver=16.12.15.01',
-		'SI' => 'http://connect.gls-slovenia.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
-		'HR' => 'http://online.gls-croatia.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
+		'SK' => 'http://online.gls-slovakia.sk/webservices/soap_server.php?wsdl&ver=18.09.12.01',
+		'CZ' => 'http://online.gls-czech.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
+		'RO' => 'http://online.gls-romania.ro/webservices/soap_server.php?wsdl&ver=18.09.12.01',
+		'SI' => 'http://connect.gls-slovenia.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
+		'HR' => 'http://online.gls-croatia.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
 	];
 
     protected $services = array("T12", "PSS", "PRS", "XS", "SZL", "INS", "SBS", "DDS", "SDS", "SAT", "AOS", "24H", "EXW", "SM1", "SM2", "CS1", "TGS", "FDS", "FSS", "PSD", "DPV");
@@ -135,7 +134,7 @@ class API {
         try {
             $return = $this->requestNuSOAP('preparelabels_gzipped_xml', $in);
         }
-        catch (\SoapFault $e) {
+        catch (\Exception $e) {
             throw new Exception\ParcelGeneration($e->getMessage());
         }
 
