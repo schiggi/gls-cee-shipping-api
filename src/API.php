@@ -63,6 +63,7 @@ class API {
         $resolver->setDefault('log_dir', '');
 		$resolver->setDefault('log_rotation_days', '7');
 		$resolver->setDefault('log_syslog', false);
+        $resolver->setDefault('log_logdna_key', false);
         $resolver->setDefault('log_msg_format', ['{method} {uri} HTTP/{version} {req_body}','RESPONSE: {code} - {res_body}',]);
         $resolver->setRequired(['url', 'username', 'password','client_number']);
         return $resolver->resolve($opts);
@@ -385,6 +386,11 @@ class API {
 				new \Monolog\Handler\SyslogHandler('api-gls-consumer')
 			);
 		}
+        if (!empty($this->config['log_logdna_key'])) {
+            $this->logger->pushHandler(
+                new \Zwijn\Monolog\Handler\LogdnaHandler($this->config['log_logdna_key'], 'api-gls-consumer')
+            );
+        }
 
         return $this->logger;
     }
