@@ -1,22 +1,22 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16046d89da9aa1458ae62f06269e9182",
+    "content-hash": "5e9ad9fc76e64c3f0f013bc85d33751e",
     "packages": [
         {
             "name": "econea/nusoap",
             "version": "v0.9.5.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/econea/nusoap.git",
+                "url": "https://github.com/pwnlabs/nusoap.git",
                 "reference": "16d506ccd4bc15089bdae5e1ee96e080cf8df770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/econea/nusoap/zipball/16d506ccd4bc15089bdae5e1ee96e080cf8df770",
+                "url": "https://api.github.com/repos/pwnlabs/nusoap/zipball/16d506ccd4bc15089bdae5e1ee96e080cf8df770",
                 "reference": "16d506ccd4bc15089bdae5e1ee96e080cf8df770",
                 "shasum": ""
             },
@@ -119,19 +119,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "2e48ae638dc0bf0849772f5590835fcd700a2e1d"
+                "reference": "89b1a76b7fda5853401297dc4b2a093cba1fda23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/2e48ae638dc0bf0849772f5590835fcd700a2e1d",
-                "reference": "2e48ae638dc0bf0849772f5590835fcd700a2e1d",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/89b1a76b7fda5853401297dc4b2a093cba1fda23",
+                "reference": "89b1a76b7fda5853401297dc4b2a093cba1fda23",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.36"
+                "phpunit/phpunit": "^5.7.27 || ^7.5"
             },
             "type": "library",
             "extra": {
@@ -162,7 +162,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2017-12-07T21:04:15+00:00"
+            "time": "2020-02-15T23:33:03+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -235,12 +235,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
+                "reference": "74f92ea154eed179700960111970234f00b1a56b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
-                "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/74f92ea154eed179700960111970234f00b1a56b",
+                "reference": "74f92ea154eed179700960111970234f00b1a56b",
                 "shasum": ""
             },
             "require": {
@@ -254,11 +254,10 @@
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
                 "graylog2/gelf-php": "~1.0",
-                "jakub-onderka/php-parallel-lint": "0.9",
                 "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
+                "php-parallel-lint/php-parallel-lint": "^1.0",
                 "phpunit/phpunit": "~4.5",
-                "phpunit/phpunit-mock-objects": "2.3.0",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "^5.3|^6.0"
@@ -305,7 +304,64 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-06-19T01:22:40+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/Seldaek",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-11T19:42:25+00:00"
+        },
+        {
+            "name": "nvanheuverzwijn/monolog-logdna",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nvanheuverzwijn/monolog-logdna.git",
+                "reference": "efa7ce48e622510df8ac27323a0c0022398e6668"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nvanheuverzwijn/monolog-logdna/zipball/efa7ce48e622510df8ac27323a0c0022398e6668",
+                "reference": "efa7ce48e622510df8ac27323a0c0022398e6668",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": ">=1.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zwijn\\Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Vanheuverzwijn",
+                    "email": "nicolas.vanheu@gmail.com"
+                }
+            ],
+            "description": "Logdna handler for Monolog",
+            "homepage": "http://github.com/nvanheuverzwijn/monolog-logdna",
+            "keywords": [
+                "log",
+                "logdna",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2018-08-20T01:57:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -313,12 +369,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+                "reference": "efd67d1dc14a7ef4fc4e518e7dee91c271d524e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/efd67d1dc14a7ef4fc4e518e7dee91c271d524e4",
+                "reference": "efd67d1dc14a7ef4fc4e518e7dee91c271d524e4",
                 "shasum": ""
             },
             "require": {
@@ -355,7 +411,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2019-08-29T13:16:46+00:00"
         },
         {
             "name": "psr/log",
@@ -410,12 +466,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "ee9e69776a8e875ac1b5b00d8cf2d2c801c42181"
+                "reference": "45d109fc830644fecc1145200d6351ce4f2769d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/ee9e69776a8e875ac1b5b00d8cf2d2c801c42181",
-                "reference": "ee9e69776a8e875ac1b5b00d8cf2d2c801c42181",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/45d109fc830644fecc1145200d6351ce4f2769d0",
+                "reference": "45d109fc830644fecc1145200d6351ce4f2769d0",
                 "shasum": ""
             },
             "require": {
@@ -423,9 +479,9 @@
                 "symfony/polyfill-mbstring": "^1.2"
             },
             "require-dev": {
-                "egulias/email-validator": "~1.2",
+                "egulias/email-validator": "~1.2 || ~2.1",
                 "mikey179/vfsstream": "^1.5",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "~4.0 || ~5.0",
                 "symfony/validator": "~2.6.9",
                 "zendframework/zend-validator": "~2.3"
             },
@@ -433,7 +489,7 @@
                 "egulias/email-validator": "Strict (RFC compliant) email validation",
                 "ext-bcmath": "Arbitrary Precision Mathematics",
                 "ext-mbstring": "Multibyte String Functions",
-                "fabpot/php-cs-fixer": "Fix PSR2 and other coding style issues",
+                "friendsofphp/php-cs-fixer": "Fix PSR2 and other coding style issues",
                 "symfony/validator": "Use Symfony validator through Respect\\Validation",
                 "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
             },
@@ -450,7 +506,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD Style"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -465,7 +521,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2018-01-02T21:47:22+00:00"
+            "time": "2019-05-28T06:10:06+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -577,12 +633,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "f3109a6aedd20e35c3a33190e932c2b063b7b50e"
+                "reference": "79701529391f802604ec92080364d617f029974b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/f3109a6aedd20e35c3a33190e932c2b063b7b50e",
-                "reference": "f3109a6aedd20e35c3a33190e932c2b063b7b50e",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/79701529391f802604ec92080364d617f029974b",
+                "reference": "79701529391f802604ec92080364d617f029974b",
                 "shasum": ""
             },
             "require": {
@@ -623,7 +679,21 @@
                 "configuration",
                 "options"
             ],
-            "time": "2018-01-11T07:56:07+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-04-06T08:30:32+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -741,16 +811,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "dev-master",
+            "version": "4.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "d4c616cad12cc3299b2fe58f630998ddecf5a802"
+                "reference": "229cd66245a78088fe580a22bfcc48ba2f014605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/d4c616cad12cc3299b2fe58f630998ddecf5a802",
-                "reference": "d4c616cad12cc3299b2fe58f630998ddecf5a802",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/229cd66245a78088fe580a22bfcc48ba2f014605",
+                "reference": "229cd66245a78088fe580a22bfcc48ba2f014605",
                 "shasum": ""
             },
             "require": {
@@ -759,16 +829,23 @@
                 "symfony/polyfill-php72": "~1.5"
             },
             "conflict": {
-                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
+                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0",
+                "symfony/console": "<3.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
+                "symfony/console": "~3.4|~4.0",
+                "symfony/process": "~3.4|~4.0",
                 "twig/twig": "~1.34|~2.4"
             },
             "suggest": {
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
-                "ext-intl": "To show region name in time zone dump"
+                "ext-intl": "To show region name in time zone dump",
+                "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
             },
+            "bin": [
+                "Resources/bin/var-dump-server"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -806,7 +883,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2018-02-26T17:04:28+00:00"
+            "time": "2019-01-28T18:03:55+00:00"
         },
         {
             "name": "tightenco/collect",
@@ -862,11 +939,14 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "nvanheuverzwijn/monolog-logdna": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
