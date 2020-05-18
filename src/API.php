@@ -4,6 +4,7 @@ namespace GLS;
 
 use nusoap_client;
 use GuzzleHttp\Client;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationException;
@@ -12,13 +13,13 @@ use Respect\Validation\Exceptions\NestedValidationException;
 class API {
 
 	protected $urls = [
-		'HU' => 'https://online.gls-hungary.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
+		'HU' => 'https://online.gls-hungary.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
         'HU-TEST' => 'https://test.gls-hungary.com/webservices/soap_server.php?wsdl&ver=15.04.18.01',
-		'SK' => 'http://online.gls-slovakia.sk/webservices/soap_server.php?wsdl&ver=18.09.12.01',
-		'CZ' => 'http://online.gls-czech.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
-		'RO' => 'http://online.gls-romania.ro/webservices/soap_server.php?wsdl&ver=18.09.12.01',
-		'SI' => 'http://connect.gls-slovenia.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
-		'HR' => 'http://online.gls-croatia.com/webservices/soap_server.php?wsdl&ver=18.09.12.01',
+		'SK' => 'http://online.gls-slovakia.sk/webservices/soap_server.php?wsdl&ver=16.12.15.01',
+		'CZ' => 'http://online.gls-czech.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
+		'RO' => 'http://online.gls-romania.ro/webservices/soap_server.php?wsdl&ver=16.12.15.01',
+		'SI' => 'http://connect.gls-slovenia.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
+		'HR' => 'http://online.gls-croatia.com/webservices/soap_server.php?wsdl&ver=16.12.15.01',
 	];
 
     protected $services = array("T12", "PSS", "PRS", "XS", "SZL", "INS", "SBS", "DDS", "SDS", "SAT", "AOS", "24H", "EXW", "SM1", "SM2", "CS1", "TGS", "FDS", "FSS", "PSD", "DPV");
@@ -63,6 +64,7 @@ class API {
         $resolver->setDefault('log_dir', '');
 		$resolver->setDefault('log_rotation_days', '7');
 		$resolver->setDefault('log_syslog', false);
+        $resolver->setDefault('log_logdna_key', false);
         $resolver->setDefault('log_msg_format', ['{method} {uri} HTTP/{version} {req_body}','RESPONSE: {code} - {res_body}',]);
         $resolver->setRequired(['url', 'username', 'password','client_number']);
         return $resolver->resolve($opts);
@@ -92,8 +94,8 @@ class API {
      */
     public function getParcelNumbers($parcel_data) {
         date_default_timezone_set("Europe/Budapest");
-        $data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        $data .="<DTU EmailAddress=\"" . $parcel_data[0]['SenderEmail'] . "\" Version=\"16.12.15.01\" Created =\"" . date(DATE_ATOM) . "\" RequestType=\"GlsApiRequest\" MethodName=\"prepareLabels\">";
+        $data = "<?xml version=\"1.0\" encoding = \"UTF-8\"?>";
+        $data .="<DTU EmailAddress = \"" . $parcel_data[0]['SenderEmail'] . "\" Version=\"16.12.15.01\" Created = \"" . date(DATE_ATOM) . "\" RequestType = \"GlsApiRequest\" MethodName=\"prepareLabels\">";
         $data .= '<Shipments>';
 
         foreach ($parcel_data as $parcel) {
@@ -103,15 +105,15 @@ class API {
 			$parcel['CodCurr'] = $parcel['CodCurr'] ?? 'HUF';
             // the smallest fraction is 5 for COD amount
             $parcel['CodAmount'] = round((float)$parcel['CodAmount'] / 5, 0) * 5;
-            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate=\"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount=\"" . $parcel['CodAmount'] . "\" CODCurr=\"" . $parcel['CodCurr'] . "\" CODRef=\"" . $parcel['CodRef'] . "\" PCount=\"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
-            $data .= "<From Name=\"" . $parcel['SenderName'] . "\" Address=\"" . $parcel['SenderAddress'] . "\" ZipCode=\"" . $parcel['SenderZipcode'] . "\" City=\"" . $parcel['SenderCity'] . "\" CtrCode=\"" . $parcel['SenderCountry'] . "\" ContactName=\"" . $parcel['SenderContact'] . "\" ContactPhone=\"" . $parcel['SenderPhone'] . "\" EmailAddress=\"" . $parcel['SenderEmail'] . "\" />";
+            $data .= "<Shipment SenderID=\"" . $this->config["client_number"] . "\" ExpSenderID=\"\" PickupDate = \"" . (isset($parcel["PickupDate"]) ? date(DATE_ATOM, strtotime($parcel["PickupDate"])) : date(DATE_ATOM)) . "\" ClientRef=\"" . $parcel['ClientRef'] . "\" CODAmount = \"" . $parcel['CodAmount'] . "\" CODCurr = \"" . $parcel['CodCurr'] . "\" CODRef = \"" . $parcel['CodRef'] . "\" PCount = \"" . (isset($parcel["Pcount"]) ? $parcel["Pcount"] : "1") . "\" Info=\"".(isset($parcel['ConsigComment']) ? $parcel['ConsigComment'] : "" ) . "\">";
+            $data .= "<From Name=\"" . $parcel['SenderName'] . "\" Address=\"" . $parcel['SenderAddress'] . "\" ZipCode = \"" . $parcel['SenderZipcode'] . "\" City = \"" . $parcel['SenderCity'] . "\" CtrCode=\"" . $parcel['SenderCountry'] . "\" ContactName=\"" . $parcel['SenderContact'] . "\" ContactPhone=\"" . $parcel['SenderPhone'] . "\" EmailAddress=\"" . $parcel['SenderEmail'] . "\" />";
             $data .= "<To Name=\"" . $parcel['ConsigName'] . "\" Address=\"" . $parcel['ConsigAddress'] . "\" ZipCode=\"" . $parcel['ConsigZipcode'] . "\" City=\"" . $parcel['ConsigCity'] . "\" CtrCode=\"" . $parcel['ConsigCountry'] . "\" ContactName=\"" . $parcel['ConsigContact'] . " #" . $parcel["ClientRef"] . "\" ContactPhone=\"" . $parcel["ConsigPhone"] . "\" EmailAddress=\"" . $parcel["ConsigEmail"] . "\" />";
             if (!empty($parcel['Services'])) {
                 $data .= '<Services>';
                 foreach ($parcel['Services'] as $service_code => $service_parameter) {
                     $data .= "<Service Code=\"" . $service_code . "\" >";
                         $data .= '<Info>';
-                            $data .= "<ServiceInfo InfoType=\"INFO\" InfoData=\"" . $service_parameter . "\" />";
+                            $data .= "<Service InfoType=\"Info\" Infodata=\"" . $service_parameter . "\" />";
                         $data .= '</Info>';
                     $data .= '</Service>';
                 }
@@ -134,7 +136,7 @@ class API {
         try {
             $return = $this->requestNuSOAP('preparelabels_gzipped_xml', $in);
         }
-        catch (\Exception $e) {
+        catch (\SoapFault $e) {
             throw new Exception\ParcelGeneration($e->getMessage());
         }
 
@@ -174,8 +176,8 @@ class API {
     public function getParcelLabels($parcel_ids) {
 
         date_default_timezone_set("Europe/Budapest");
-        $data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        $data .="<DTU EmailAddress=\"test@gls-hungary.com\" Version=\"16.12.15.01\" Created=\"" . date(DATE_ATOM) . "\" RequestType=\"GlsApiRequest\" MethodName=\"printLabels\">";
+        $data = "<?xml version=\"1.0\" encoding = \"UTF-8\"?>";
+        $data .="<DTU EmailAddress = \"test@gls-hungary.com\" Version=\"16.12.15.01\" Created = \"" . date(DATE_ATOM) . "\" RequestType = \"GlsApiRequest\" MethodName=\"printLabels\">";
         $data .= '<Shipments>';
         foreach ($parcel_ids as $parcel_id) {
             $data .= "<Shipment><PclIDs><long>";
@@ -274,8 +276,8 @@ class API {
     public function deleteParcels($parcel_ids) {
 
         date_default_timezone_set("Europe/Budapest");
-        $data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        $data .="<DTU EmailAddress=\"test@gls-hungary.com\" Version=\"16.12.15.01\" Created=\"" . date(DATE_ATOM) . "\" RequestType=\"GlsApiRequest\" MethodName=\"deleteLabels\">";
+        $data = "<?xml version=\"1.0\" encoding = \"UTF-8\"?>";
+        $data .="<DTU EmailAddress = \"test@gls-hungary.com\" Version=\"16.12.15.01\" Created = \"" . date(DATE_ATOM) . "\" RequestType = \"GlsApiRequest\" MethodName=\"deleteLabels\">";
         $data .= '<Shipments>';
         foreach ($parcel_ids as $parcel_id) {
             $data .= "<Shipment><PclIDs><long>";
@@ -385,6 +387,11 @@ class API {
 				new \Monolog\Handler\SyslogHandler('api-gls-consumer')
 			);
 		}
+        if (!empty($this->config['log_logdna_key'])) {
+            $this->logger->pushHandler(
+                new \Zwijn\Monolog\Handler\LogdnaHandler($this->config['log_logdna_key'], 'api-gls-consumer')
+            );
+        }
 
         return $this->logger;
     }
