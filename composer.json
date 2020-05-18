@@ -1,31 +1,33 @@
 {
-    "name": "schiggi/gls-cee-shipping-api",
-    "description": "API for GLS Shipping & Tracking in Eastern Europe",
-    "license": "GPL-3.0",
-    "authors": [
-        {
-          "name"    : "schiggi",
-          "email": "alex@schikalow.de",
-          "homepage": "http://schikalow.de/",
-          "role": "Maintainer"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-	    "php"               : "^7.1",
-        "guzzlehttp/guzzle": "^6.0",
-        "respect/validation":"~1.1",
-        "symfony/dom-crawler": "~2.5.7",
-        "symfony/css-selector": "~2.5.7",
-        "symfony/options-resolver": "^3.0",
-        "tightenco/collect":"^5.4",
-        "monolog/monolog":"^1.23",
-        "econea/nusoap":"~0.9.5.4",
-        "nvanheuverzwijn/monolog-logdna": "dev-master"
-    },
-	"autoload": {
-		"psr-4": {
-			"GLS\\": "src/"
-		}
-	}
+  "name": "schiggi/gls-cee-shipping-api",
+  "description": "API for GLS Shipping & Tracking in Eastern Europe",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name"    : "schiggi",
+      "email": "alex@schikalow.de",
+      "homepage": "http://schikalow.de/",
+      "role": "Maintainer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php"               : "^7.1",
+    "ext-zlib": "*",
+    "ext-dom": "*",
+    "ext-simplexml": "*",
+    "guzzlehttp/guzzle": "^6.0",
+    "respect/validation":"~1.1",
+    "symfony/css-selector": "~2.5.7",
+    "symfony/options-resolver": "^3.0",
+    "tightenco/collect":"^5.4",
+    "monolog/monolog":"^1.23",
+    "econea/nusoap":"~0.9.5.4",
+    "nvanheuverzwijn/monolog-logdna": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "GLS\\": "src/"
+    }
+  }
 }
