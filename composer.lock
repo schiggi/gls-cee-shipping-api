@@ -1,22 +1,22 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76b6c8229022484f6d77c1f41127f9ca",
+    "content-hash": "d80a17af6ee9a3891105e197f8ec50cf",
     "packages": [
         {
             "name": "econea/nusoap",
             "version": "v0.9.5.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/econea/nusoap.git",
+                "url": "https://github.com/pwnlabs/nusoap.git",
                 "reference": "16d506ccd4bc15089bdae5e1ee96e080cf8df770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/econea/nusoap/zipball/16d506ccd4bc15089bdae5e1ee96e080cf8df770",
+                "url": "https://api.github.com/repos/pwnlabs/nusoap/zipball/16d506ccd4bc15089bdae5e1ee96e080cf8df770",
                 "reference": "16d506ccd4bc15089bdae5e1ee96e080cf8df770",
                 "shasum": ""
             },
@@ -313,6 +313,53 @@
                 "psr-3"
             ],
             "time": "2019-09-09T11:53:32+00:00"
+        },
+        {
+            "name": "nvanheuverzwijn/monolog-logdna",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nvanheuverzwijn/monolog-logdna.git",
+                "reference": "efa7ce48e622510df8ac27323a0c0022398e6668"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nvanheuverzwijn/monolog-logdna/zipball/efa7ce48e622510df8ac27323a0c0022398e6668",
+                "reference": "efa7ce48e622510df8ac27323a0c0022398e6668",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": ">=1.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zwijn\\Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Vanheuverzwijn",
+                    "email": "nicolas.vanheu@gmail.com"
+                }
+            ],
+            "description": "Logdna handler for Monolog",
+            "homepage": "http://github.com/nvanheuverzwijn/monolog-logdna",
+            "keywords": [
+                "log",
+                "logdna",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2018-08-20T01:57:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -863,7 +910,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "nvanheuverzwijn/monolog-logdna": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -873,8 +922,5 @@
         "ext-simplexml": "*"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "ext-exif": "0",
-        "ext-ldap": "0"
-    }
+    "plugin-api-version": "1.1.0"
 }
