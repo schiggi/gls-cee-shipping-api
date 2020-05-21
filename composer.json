@@ -23,7 +23,7 @@
         "tightenco/collect":"^5.4",
         "monolog/monolog":"^1.23",
         "econea/nusoap":"~0.9.5.4",
-        "nvanheuverzwijn/monolog-logdna": "dev-master"
+        "nvanheuverzwijn/monolog-logdna": "^2.1"
     },
 	"autoload": {
 		"psr-4": {
