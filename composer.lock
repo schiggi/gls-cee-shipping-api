@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5845aa82356053bbef7376421ab3c46d",
+    "content-hash": "e70f8ab7c6fa8952ba8bb1268898e303",
     "packages": [
+        {
+            "name": "butopea/monolog-logdna",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/butopea/monolog-logdna.git",
+                "reference": "301c3df44aeb27372495ca355f554dcf40d5a985"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/butopea/monolog-logdna/zipball/301c3df44aeb27372495ca355f554dcf40d5a985",
+                "reference": "301c3df44aeb27372495ca355f554dcf40d5a985",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": ">=1.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Butopea\\Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Vanheuverzwijn",
+                    "email": "nicolas.vanheu@gmail.com"
+                },
+                {
+                    "name": "Mohammad Tomaraei",
+                    "email": "mo@butopea.com"
+                }
+            ],
+            "description": "Logdna handler for Monolog",
+            "homepage": "http://github.com/butopea/monolog-logdna",
+            "keywords": [
+                "log",
+                "logdna",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2020-05-24T04:04:45+00:00"
+        },
         {
             "name": "econea/nusoap",
             "version": "v0.9.5.4",
@@ -323,53 +374,6 @@
                 }
             ],
             "time": "2020-05-11T19:42:25+00:00"
-        },
-        {
-            "name": "nvanheuverzwijn/monolog-logdna",
-            "version": "2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nvanheuverzwijn/monolog-logdna.git",
-                "reference": "6e484afbb216396dc7ce93563790c51bae3ed967"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nvanheuverzwijn/monolog-logdna/zipball/6e484afbb216396dc7ce93563790c51bae3ed967",
-                "reference": "6e484afbb216396dc7ce93563790c51bae3ed967",
-                "shasum": ""
-            },
-            "require": {
-                "monolog/monolog": ">=1.0",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Zwijn\\Monolog\\": "src/Monolog"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Vanheuverzwijn",
-                    "email": "nicolas.vanheu@gmail.com"
-                }
-            ],
-            "description": "Logdna handler for Monolog",
-            "homepage": "http://github.com/nvanheuverzwijn/monolog-logdna",
-            "keywords": [
-                "log",
-                "logdna",
-                "logging",
-                "psr-3"
-            ],
-            "time": "2018-08-20T01:23:44+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1062,9 +1066,5 @@
         "ext-simplexml": "*"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "ext-exif": "0",
-        "ext-ldap": "0"
-    },
     "plugin-api-version": "1.1.0"
 }

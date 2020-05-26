@@ -388,7 +388,7 @@ class API {
 		}
         if (!empty($this->config['log_logdna_key'])) {
             $this->logger->pushHandler(
-                new \Zwijn\Monolog\Handler\LogdnaHandler($this->config['log_logdna_key'], 'api-gls-consumer')
+                new \Butopea\Monolog\Handler\LogdnaHandler($this->config['log_logdna_key'], gethostname())
             );
         }
 
